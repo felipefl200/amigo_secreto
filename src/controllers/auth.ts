@@ -21,7 +21,7 @@ export const login: RequestHandler = (req, res) => {
   return res.status(403).json({ error: "Acesso negado." });
 };
 
-export const validade: RequestHandler = (req, res, next) => {
+export const validate: RequestHandler = (req, res, next) => {
   if (!req.headers.authorization) {
     return res.status(403).json({ error: "Acesso negado." });
   }

@@ -14,5 +14,25 @@ content-type: application/json
 
 ### Teste com token
 GET http://localhost:3000/admin/ping
-content-type: application/json
+Content-Type: application/json
 Authorization: token jPADh8UPwqRNajhViXKQIsPET+QvJmIPvFvK3bepECA%07122023
+
+### Get all events
+GET http://localhost:3000/admin/events
+Content-Type: application/json
+Authorization: token jPADh8UPwqRNajhViXKQIsPET+QvJmIPvFvK3bepECA%07122023
+
+### Get one event
+GET http://localhost:3000/admin/events/clpvmf01c0000scdt1jhiwdas
+Content-Type: application/json
+Authorization: token jPADh8UPwqRNajhViXKQIsPET+QvJmIPvFvK3bepECA%07122023
+
+### Create new Event
+POST http://localhost:3000/admin/events
+Content-Type: application/json
+Authorization: token jPADh8UPwqRNajhViXKQIsPET+QvJmIPvFvK3bepECA%07122023
+
+{
+    "title": "Novo evento 2",
+    "description": "Descrição do evento 2"
+}
