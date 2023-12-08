@@ -15,12 +15,20 @@ export const getAll: RequestHandler = async (req, res) => {
   return res.json({ error: "Ocorreu um erro." });
 };
 
+export const getEvent: RequestHandler = async (req, res) => {
+  const { id } = req.params;
+  const eventItem = await events.getOne(id);
+  if (eventItem) return res.json({ event: eventItem });
+
+  res.status(500).json({ error: "Ocorreu um erro." });
+};
+
 export const createEvent: RequestHandler = async (req, res) => {
   const parseEvent = eventSchema.safeParse(req.body);
 
-  if (!parseEvent.success) {
+  if (!parseEvent.success)
     return res.status(422).json({ error: "Dados inválidados." });
-  }
+
   const result = await events.createEvent(parseEvent.data);
   if (result) {
     return res.status(201).json({ message: "Evento criado com sucesso." });
@@ -28,10 +36,30 @@ export const createEvent: RequestHandler = async (req, res) => {
   return res.json({ error: "Ocorreu um erro na criação." });
 };
 
-export const getEvent: RequestHandler = async (req, res) => {
+export const updateEvent: RequestHandler = async (req, res) => {
   const { id } = req.params;
-  const eventItem = await events.getOne(id);
-  if (eventItem) return res.json({ event: eventItem });
+  const parseEvent = eventSchema.safeParse(req.body);
 
-  res.status(500).json({ error: "Ocorreu um erro." });
+  if (!parseEvent.success)
+    return res.status(422).json({ error: "Dados inválidados." });
+
+  const result = await events.updateEvent(id, parseEvent.data);
+
+  if (result)
+    return res.status(200).json({ message: "Evento atualizado com sucesso." });
+
+  return res
+    .status(500)
+    .json({ error: "Ocorreu um erro na atualização do evento." });
+};
+
+export const deleteEvent: RequestHandler = async (req, res) => {
+  const { id } = req.params;
+  const result = await events.deleteEvent(id);
+
+  if (result) return res.json({ message: "Evento exluído com sucesso." });
+
+  return res
+    .status(500)
+    .json({ message: "Ocorreu um erro ao excluir o evento." });
 };

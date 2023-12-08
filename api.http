@@ -15,24 +15,41 @@ content-type: application/json
 ### Teste com token
 GET http://localhost:3000/admin/ping
 Content-Type: application/json
-Authorization: token jPADh8UPwqRNajhViXKQIsPET+QvJmIPvFvK3bepECA%07122023
+Authorization: token jPADh8UPwqRNajhViXKQIsPET+QvJmIPvFvK3bepECA%08122023
 
 ### Get all events
 GET http://localhost:3000/admin/events
 Content-Type: application/json
-Authorization: token jPADh8UPwqRNajhViXKQIsPET+QvJmIPvFvK3bepECA%07122023
+Authorization: token jPADh8UPwqRNajhViXKQIsPET+QvJmIPvFvK3bepECA%08122023
 
 ### Get one event
 GET http://localhost:3000/admin/events/clpvmf01c0000scdt1jhiwdas
 Content-Type: application/json
-Authorization: token jPADh8UPwqRNajhViXKQIsPET+QvJmIPvFvK3bepECA%07122023
+Authorization: token jPADh8UPwqRNajhViXKQIsPET+QvJmIPvFvK3bepECA%08122023
 
 ### Create new Event
 POST http://localhost:3000/admin/events
 Content-Type: application/json
-Authorization: token jPADh8UPwqRNajhViXKQIsPET+QvJmIPvFvK3bepECA%07122023
+Authorization: token jPADh8UPwqRNajhViXKQIsPET+QvJmIPvFvK3bepECA%08122023
 
 {
-    "title": "Novo evento 2",
-    "description": "Descrição do evento 2"
+    "title": "Novo evento 3",
+    "description": "Descrição do evento 3",
+    "grouped": true
 }
+
+### Update Event
+PUT http://localhost:3000/admin/events/clpvmf01c0000scdt1jhiwdas
+Content-Type: application/json
+Authorization: token jPADh8UPwqRNajhViXKQIsPET+QvJmIPvFvK3bepECA%08122023
+
+{
+     "title": "Udpate evento",
+    "description": "Update 2 descrição do evento 3",
+    "grouped": true
+}
+
+### Delete Event
+DELETE  http://localhost:3000/admin/events/clpvo7f180000z9nkho86exim
+Content-Type: application/json
+Authorization: token jPADh8UPwqRNajhViXKQIsPET+QvJmIPvFvK3bepECA%08122023
