@@ -88,13 +88,13 @@ Content-Type: application/json
 Authorization: token jPADh8UPwqRNajhViXKQIsPET+QvJmIPvFvK3bepECA%11122023
 
 ### Create People
-POST http://localhost:3000/admin/events/clpwpih750000uznfag69l8rb/groups/clq15yldh000ak411tjz7tvv6/people
+POST http://localhost:3000/admin/events/clpvmf01c0000scdt1jhiwdas/groups/clq14xxgi0001k411i56nk3hr/people
 Content-Type: application/json
 Authorization: token jPADh8UPwqRNajhViXKQIsPET+QvJmIPvFvK3bepECA%11122023
 
 {
-    "name": "Felipe",
-    "cpf": "8282383128231"
+    "name": "Ronaldo",
+    "cpf": "96282383121"
 }
 
 ### Update People
@@ -104,5 +104,10 @@ Authorization: token jPADh8UPwqRNajhViXKQIsPET+QvJmIPvFvK3bepECA%11122023
 
 {
     "name": "Felipe França Lohmann",
-    "cpf": "8283343"
+    "cpf": "82833243"
 }
+
+### Delete Person
+DELETE http://localhost:3000/admin/events/clpwpih750000uznfag69l8rb/groups/clq15yldh000ak411tjz7tvv6/people/clq1dpt5y0001n7enq62cn40w
+Content-Type: application/json
+Authorization: token jPADh8UPwqRNajhViXKQIsPET+QvJmIPvFvK3bepECA%11122023

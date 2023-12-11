@@ -50,7 +50,7 @@ export const createPerson = async (data: PeopleCreate) => {
 
 type PeopleUpdate = Prisma.Args<typeof prisma.eventPeople, "update">["data"];
 type UpdateFilters = {
-  id?: string;
+  id: string;
   id_event: string;
   id_group?: string;
 };
@@ -59,7 +59,7 @@ export const updatePeople = async (
   data: PeopleUpdate
 ) => {
   try {
-    return await prisma.eventPeople.updateMany({ where: filters, data });
+    return await prisma.eventPeople.update({ where: filters, data });
   } catch (error) {
     return false;
   }
@@ -72,7 +72,7 @@ type DeleteFilters = {
 };
 export const deletePerson = async (filters: DeleteFilters) => {
   try {
-    return await prisma.event.delete({ where: filters });
+    return await prisma.eventPeople.delete({ where: filters });
   } catch (error) {
     return false;
   }

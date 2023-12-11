@@ -65,7 +65,8 @@ export const updatePerson: RequestHandler = async (req, res) => {
     { id, id_event, id_group },
     body.data
   );
-  if (!updatePerson) return res.status(500).json({ error: "Ocorreu um erro." });
+  if (!updatedPerson)
+    return res.status(500).json({ error: "Ocorreu um erro." });
 
   const personItem = await people.getPerson({ id, id_event });
   return res.json({
@@ -76,4 +77,16 @@ export const updatePerson: RequestHandler = async (req, res) => {
 
 export const deletePerson: RequestHandler = async (req, res) => {
   const { id, id_event, id_group } = req.params;
+  const deletedPerson = await people.deletePerson({
+    id,
+    id_event,
+    id_group,
+  });
+  if (deletedPerson)
+    return res.json({
+      message: "Pessoa deletada com sucesso.",
+      person: deletedPerson,
+    });
+
+  return res.json({ message: "Ocorreu um erro ao deletar uma pessoa." });
 };
