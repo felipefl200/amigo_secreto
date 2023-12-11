@@ -2,12 +2,6 @@ import { RequestHandler } from "express";
 import * as events from "../services/events";
 import { z } from "zod";
 
-const eventSchema = z.object({
-  title: z.string(),
-  description: z.string(),
-  grouped: z.boolean().optional(),
-});
-
 export const getAll: RequestHandler = async (req, res) => {
   const items = await events.getAll();
   if (items) return res.json({ events: items });
@@ -24,7 +18,12 @@ export const getEvent: RequestHandler = async (req, res) => {
 };
 
 export const createEvent: RequestHandler = async (req, res) => {
-  const parseEvent = eventSchema.safeParse(req.body);
+  const createEventSchema = z.object({
+    title: z.string(),
+    description: z.string(),
+    grouped: z.boolean().optional(),
+  });
+  const parseEvent = createEventSchema.safeParse(req.body);
 
   if (!parseEvent.success)
     return res.status(422).json({ error: "Dados inválidados." });
@@ -37,15 +36,26 @@ export const createEvent: RequestHandler = async (req, res) => {
 };
 
 export const updateEvent: RequestHandler = async (req, res) => {
+  const updateEventSchema = z.object({
+    status: z.boolean().optional(),
+    title: z.string().optional(),
+    description: z.string().optional(),
+    grouped: z.boolean().optional(),
+  });
   const { id } = req.params;
-  const parseEvent = eventSchema.safeParse(req.body);
+  const parseEvent = updateEventSchema.safeParse(req.body);
 
   if (!parseEvent.success)
     return res.status(422).json({ error: "Dados inválidados." });
 
-  const result = await events.updateEvent(id, parseEvent.data);
+  const event = await events.updateEvent(id, parseEvent.data);
+  if (event && event.status) {
+    //TODO: Fazer sorteio
+  } else {
+    //TODO: Limpar Sorteio
+  }
 
-  if (result)
+  if (event)
     return res.status(200).json({ message: "Evento atualizado com sucesso." });
 
   return res
