@@ -4,7 +4,7 @@ GET http://localhost:3000/ping
 ### Teste admin ping
 GET http://localhost:3000/admin/ping
 
-### Teste Login
+### Teste Login -- passar data do dia atual
 POST http://localhost:3000/admin/login
 content-type: application/json
 
@@ -15,12 +15,12 @@ content-type: application/json
 ### Teste com token
 GET http://localhost:3000/admin/ping
 Content-Type: application/json
-Authorization: token jPADh8UPwqRNajhViXKQIsPET+QvJmIPvFvK3bepECA%08122023
+Authorization: token jPADh8UPwqRNajhViXKQIsPET+QvJmIPvFvK3bepECA%11122023
 
 ### Get all events
 GET http://localhost:3000/admin/events
 Content-Type: application/json
-Authorization: token jPADh8UPwqRNajhViXKQIsPET+QvJmIPvFvK3bepECA%08122023
+Authorization: token jPADh8UPwqRNajhViXKQIsPET+QvJmIPvFvK3bepECA%11122023
 
 ### Get one event
 GET http://localhost:3000/admin/events/clpvmf01c0000scdt1jhiwdas
@@ -30,7 +30,7 @@ Authorization: token jPADh8UPwqRNajhViXKQIsPET+QvJmIPvFvK3bepECA%08122023
 ### Create new Event
 POST http://localhost:3000/admin/events
 Content-Type: application/json
-Authorization: token jPADh8UPwqRNajhViXKQIsPET+QvJmIPvFvK3bepECA%08122023
+Authorization: token jPADh8UPwqRNajhViXKQIsPET+QvJmIPvFvK3bepECA%11122023
 
 {
     "title": "Novo evento 3",
@@ -55,17 +55,17 @@ Content-Type: application/json
 Authorization: token jPADh8UPwqRNajhViXKQIsPET+QvJmIPvFvK3bepECA%08122023
 
 ### Get All Groups
-GET  http://localhost:3000/admin/events/clpvmf01c0000scdt1jhiwdas/groups
+GET  http://localhost:3000/admin/events/clpwpih750000uznfag69l8rb/groups
 Content-Type: application/json
 Authorization: token jPADh8UPwqRNajhViXKQIsPET+QvJmIPvFvK3bepECA%11122023
 
 ### Create new Group
-POST http://localhost:3000/admin/events/clpvmf01c0000scdt1jhiwdas/groups
+POST http://localhost:3000/admin/events/clpwpih750000uznfag69l8rb/groups
 Content-Type: application/json
 Authorization: token jPADh8UPwqRNajhViXKQIsPET+QvJmIPvFvK3bepECA%11122023
 
 {
-    "name": "Nome do novo grupo"  
+    "name": "Primeiro grupo no evento rb"  
 }
 
 ### Update Group
@@ -75,4 +75,34 @@ Authorization: token jPADh8UPwqRNajhViXKQIsPET+QvJmIPvFvK3bepECA%11122023
 
 {
     "name": "Update 2 nome grupo"  
+}
+
+### Delete Group
+DELETE http://localhost:3000/admin/events/clpvmf01c0000scdt1jhiwdas/groups/clq0zq04y0001ubw2x03vnllx
+Content-Type: application/json
+Authorization: token jPADh8UPwqRNajhViXKQIsPET+QvJmIPvFvK3bepECA%11122023
+
+### Get People
+GET http://localhost:3000/admin/events/clpvmf01c0000scdt1jhiwdas/groups/clq0zq04y0001ubw2x03vnllx/people
+Content-Type: application/json
+Authorization: token jPADh8UPwqRNajhViXKQIsPET+QvJmIPvFvK3bepECA%11122023
+
+### Create People
+POST http://localhost:3000/admin/events/clpwpih750000uznfag69l8rb/groups/clq15yldh000ak411tjz7tvv6/people
+Content-Type: application/json
+Authorization: token jPADh8UPwqRNajhViXKQIsPET+QvJmIPvFvK3bepECA%11122023
+
+{
+    "name": "Felipe",
+    "cpf": "8282383128231"
+}
+
+### Update People
+PUT http://localhost:3000/admin/events/clpwpih750000uznfag69l8rb/groups/clq15yldh000ak411tjz7tvv6/people/clq1dpt5y0001n7enq62cn40w
+Content-Type: application/json
+Authorization: token jPADh8UPwqRNajhViXKQIsPET+QvJmIPvFvK3bepECA%11122023
+
+{
+    "name": "Felipe França Lohmann",
+    "cpf": "8283343"
 }
