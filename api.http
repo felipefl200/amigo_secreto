@@ -93,18 +93,18 @@ Content-Type: application/json
 Authorization: token jPADh8UPwqRNajhViXKQIsPET+QvJmIPvFvK3bepECA%11122023
 
 {
-    "name": "Ronaldo",
+    "name": "Ronaldo da Silva",
     "cpf": "96282383121"
 }
 
 ### Update People
-PUT http://localhost:3000/admin/events/clpwpih750000uznfag69l8rb/groups/clq15yldh000ak411tjz7tvv6/people/clq1dpt5y0001n7enq62cn40w
+PUT http://localhost:3000/admin/events/clpvmf01c0000scdt1jhiwdas/groups/clq14xxgi0001k411i56nk3hr/people/clq1htk5w00031190wxx6h7hl
 Content-Type: application/json
 Authorization: token jPADh8UPwqRNajhViXKQIsPET+QvJmIPvFvK3bepECA%11122023
 
 {
-    "name": "Felipe França Lohmann",
-    "cpf": "82833243"
+    "name": "Ronaldinho Gaúcho",
+    "cpf": "8283333243"
 }
 
 ### Delete Person
