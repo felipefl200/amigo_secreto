@@ -1,6 +1,7 @@
 import { RequestHandler } from "express";
 import * as people from "../services/people";
 import { string, z } from "zod";
+import { decryptMatch } from "../utils/match";
 
 export const getAll: RequestHandler = async (req, res) => {
   const { id_event, id_group } = req.params;
@@ -14,6 +15,39 @@ export const getAll: RequestHandler = async (req, res) => {
       .json({ error: "Ocorreu um erro ao obter os dados." });
 
   return res.json({ people: items });
+};
+
+export const searchPerson: RequestHandler = async (req, res) => {
+  const { id_event } = req.params;
+  const searchPersonSchema = z.object({
+    cpf: z.string().transform((val) => val.replace(/\.|-/gm, "")),
+  });
+  const cpf = searchPersonSchema.safeParse(req.query);
+
+  if (!cpf.success) return res.status(422).json({ error: "Dados inválidos." });
+
+  const personItem = await people.getPerson({
+    id_event,
+    cpf: cpf.data.cpf,
+  });
+  if (personItem && personItem.matched) {
+    const matchId = decryptMatch(personItem.matched);
+    const personMatched = await people.getPerson({
+      id_event,
+      id: matchId,
+    });
+    if (personMatched)
+      return res.json({
+        person: { id: personItem.id, name: personItem.name },
+        personMatched: {
+          id: personMatched.id,
+          name: personMatched.name,
+        },
+      });
+  }
+  return res
+    .status(500)
+    .json({ error: "Ocorreu um erro na busca do usuário." });
 };
 
 export const getPerson: RequestHandler = async (req, res) => {
